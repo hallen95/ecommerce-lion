@@ -1,14 +1,15 @@
 import React from 'react';
 import './itemlistcontainer.css';
+import ItemCount from '../itemCount/ItemCount';
 
-class ItemListContainer extends React.Component {
 
- render(){
-    return(
-        <header className="styleItemContainer">
-        {this.props.greeting}
-        </header>
-        );
+const ItemListContainer = () => {
+
+    return (
+        <div>
+            <ItemCount initial={1} stock={5}/>
+        </div>
+    )
 }
-}
+
 export default ItemListContainer;
