@@ -25,7 +25,7 @@ const ItemCount = ({initial, stock}) => {
 
     return (
         // este es el manejador de los botones, se pasan las funciones por prop
-        <div>
+        <div>   
         <Count min={resta} sum={suma} onAdd={onAdd} count={contador}/>
         </div>
     )
