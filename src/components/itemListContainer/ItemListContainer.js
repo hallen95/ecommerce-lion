@@ -13,7 +13,7 @@ useEffect(() => {
         setTimeout(() => {
             response(productos);
         }, 2000)
-    });
+    })
 
     call.then((productos) => {
         console.log(productos);
