@@ -3,24 +3,6 @@ import './itemlistcontainer.css';
 import ItemCount from '../itemCount/ItemCount';
 import ItemList from '../itemList/ItemList';
 
-
-const ItemListContainer = () => {
-
-const [estado, setState] = useState();
-
-useEffect(() => {
-    const call = new Promise((response, reject) => {
-        setTimeout(() => {
-            response(productos);
-        }, 2000)
-    })
-
-    call.then((productos) => {
-        console.log(productos);
-        setState(productos);
-    })    
-}, [])
-
 const productos = [
     {
         id: 1,
@@ -48,6 +30,24 @@ const productos = [
         precio: 1400
     }
 ]
+
+const ItemListContainer = () => {
+
+const [estado, setState] = useState();
+
+useEffect(() => {
+    const call = new Promise((response, reject) => {
+        setTimeout(() => {
+            response(productos);
+        }, 2000)
+    })
+
+    call.then((productos) => {
+        console.log(productos);
+        setState(productos);
+    })    
+}, [])
+
 
     return (
         <div>

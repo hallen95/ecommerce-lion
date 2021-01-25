@@ -1,21 +1,15 @@
 import React from 'react';
 import './App.css';
 import NavBar from './components/navBar/NavBar';
-import ItemDetailContainer from './components/itemDetail/ItemDetail'
+import ItemDetailContainer from './components/itemDetailContainer/ItemDetailContainer';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
-    < BrowserRouter>
+    <React.Fragment>
     <NavBar />
-    <Switch>
-      <Route exact path='/'>
-        <ItemDetailContainer />
-      </Route>
-      <Route exact path='/item/:id'> 
-      </Route>
-    </Switch>
-    </BrowserRouter>
+    <ItemDetailContainer />
+    </React.Fragment>
   );
 }
 

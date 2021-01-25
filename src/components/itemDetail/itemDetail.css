@@ -1,0 +1,13 @@
+
+.itemDetailStyle{
+    display: block;
+    text-align: center;
+    font-size: 68px;
+    font-weight: 300;
+    height: 200px;
+    width: 100px;
+}
+
+.DescripcionDetail{
+    font-size: 18px;
+}
