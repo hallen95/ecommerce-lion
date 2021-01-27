@@ -7,9 +7,10 @@ const ItemDetail = ({getItem}) => {
             <h2 className="itemDetailStyle">
                 {getItem.nombre}
             </h2>
-            <img className="fotoDetail" src={getItem.imagen} alt="foto del producto original finish"/>
+            <img className="fotoDetail" src={getItem.imagen} alt="foto del producto Terrnova de Lion"/>
             <div className="DescripcionDetail">{getItem.descripcion}</div>
         </div>
+
     )   
 }
 
