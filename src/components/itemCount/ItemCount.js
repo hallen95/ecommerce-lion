@@ -1,5 +1,4 @@
 import React, { useState } from 'react'; 
-import Count from './Count';
 import './itemCount.css';
 // aca recibe las propiedades pasadas por ItemListContainer y se crea la logica
 const ItemCount = ({initial, stock}) => {
@@ -8,7 +7,7 @@ const ItemCount = ({initial, stock}) => {
     const [contador, setContador] = useState(initial);
 
     const suma = () => {
-        contador > stock ? 
+        contador >= stock ? 
         alert('alerta superaste el stock') 
         : setContador(contador + 1)
     }
@@ -25,9 +24,19 @@ const ItemCount = ({initial, stock}) => {
 
     return (
         // este es el manejador de los botones, se pasan las funciones por prop
-        <div>   
-        <Count min={resta} sum={suma} onAdd={onAdd} count={contador}/>
-        </div>
+            <>
+                <div className="botones-wrapper">
+                    <button className="botonesCart" onClick={suma}>+</button>
+                    <p>{contador} </p>
+                    <button className="botonesCart" onClick={resta}>-</button>
+                    <button className="botonesCart"
+                        disabled={contador < 1}
+                        onClick={onAdd}>
+                        agregar {contador} {contador <= 1 
+                                ? 'articulo al carrito' : 'articulos'}
+                    </button>
+                </div>
+            </>
     )
 };
 

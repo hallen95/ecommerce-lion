@@ -13,15 +13,16 @@ return (
       <Nav className="mr-auto">
         <Nav.Link href="#home">Productos</Nav.Link>
         <Nav.Link href="#link">Contacto</Nav.Link>
-        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-        <Link to={'/category/shampoo'}>
-          <NavDropdown.Item href="#action/3.1">Shampoos</NavDropdown.Item>
-        </Link>
-        <NavDropdown.Divider />
-        <Link to={'/category/desengrasante'}>
-        <NavDropdown.Item href="#action/3.4">Desengrasante</NavDropdown.Item>
-        </Link>
-      </NavDropdown>
+
+        <NavDropdown title="Categorias" id="basic-nav-dropdown">
+          <Link to={`/category/categoryId`}>
+            <NavDropdown.Item>Shampoos</NavDropdown.Item>
+          </Link>
+          <NavDropdown.Divider />
+          <Link to={'/category/:categoryId'}>
+          <NavDropdown.Item>Desengrasante</NavDropdown.Item>
+          </Link>
+        </NavDropdown>
       </Nav>
       <Form inline>
         <CartWidget/>

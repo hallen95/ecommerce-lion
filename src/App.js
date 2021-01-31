@@ -15,7 +15,7 @@ function App() {
         <Route exact path='/'>
           <ItemListContainer/>
         </Route>
-        <Route path='/category/:id'>
+        <Route path='/category/categoryId'>
           <ItemListContainer/>
         </Route>
         <Route path='/item/:id'>

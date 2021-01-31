@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './itemlistcontainer.css';
 import ItemList from '../itemList/ItemList';
 import imagenes from '../../photos/Imagenes'
+import { useParams } from 'react-router-dom'
 
 const productos = [
     {
@@ -40,8 +41,8 @@ const productos = [
 ]
 
 const ItemListContainer = () => {
-    const [estado, setState] = useState();
-
+    const [estado, setState] = useState([]);
+    const { categoryId } = useParams();
 
     useEffect(() => {
         const call = new Promise((response, reject) => {
@@ -51,10 +52,10 @@ const ItemListContainer = () => {
         })
 
         call.then((productos) => {
-            console.log(productos);
             setState(productos);
         })    
     }, [] )
+
 
     return (
                     <ItemList  products={estado}/>

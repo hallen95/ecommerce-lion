@@ -2,11 +2,10 @@ import React from 'react'
 import './item.css'
 import { Link } from 'react-router-dom'
 import { Card, Button } from 'react-bootstrap'
-
 // e item en si, recibe el itemmapeado resultado de ItemList y lo pone en pantalla 2 s despues
 const Item = ({itemmapeado}) => {
     return (
-                    <Card className="estilo-item-presentacion" style={{ width: '18rem' }}>
+                    <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src={itemmapeado.imagen}/>
                     <Card.Body>
                         <Card.Title>{itemmapeado.nombre}</Card.Title>

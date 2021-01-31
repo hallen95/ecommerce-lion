@@ -1,3 +1,11 @@
-.itemCountStyle{
-    display: block;
+.botones-wrapper{
+    border: red 1px solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 };
+
+.botonesCart{
+    display: flex;
+    border: green 1px solid;    
+}
