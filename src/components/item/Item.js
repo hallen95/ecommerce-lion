@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card, Button } from 'react-bootstrap'
-// e item en si, recibe el itemmapeado resultado de ItemList y lo pone en pantalla 2 s despues
+
 const Item = ({itemmapeado}) => {
     return (
                     <Card style={{ width: '18rem' }}>

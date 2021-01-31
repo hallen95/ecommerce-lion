@@ -45,6 +45,10 @@ const ItemListContainer = () => {
     const { categoryId } = useParams();
 
     useEffect(() => {
+    console.log(categoryId);
+    }, [categoryId])
+    
+    useEffect(() => {
         const call = new Promise((response, reject) => {
             setTimeout(() => {
                 response(productos);

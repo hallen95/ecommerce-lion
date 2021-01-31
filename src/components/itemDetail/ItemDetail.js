@@ -25,15 +25,26 @@ const ItemDetail = ({getItem}) => {
         console.log(contadorCarrito);
         console.log(contador);
     }
+
+    const confirm = () => {
+        alert(`sus productos totales son ${contadorCarrito} y se añadirán al carrito`)
+    }
     
     return (
         <React.Fragment>
-            <h2 className="itemDetailStyle">
+            <div className="itemDetailStyle"><h2>
                 {getItem.nombre}
             </h2>
-            <img className="fotoDetail" src={getItem.imagen} alt="foto del producto Terrnova de Lion"/>
-            <div className="DescripcionDetail">{getItem.descripcion}</div>
-            <ItemCount suma={suma} resta={resta} onAdd={onAdd} contador={contador} contadorCarrito={contadorCarrito}/>
+            <img  src={getItem.imagen} alt="foto del producto Terrnova de Lion"/>
+            <div>{getItem.descripcion}</div>
+            </div>
+            <ItemCount 
+                suma={suma} 
+                resta={resta} 
+                onAdd={onAdd} 
+                confirm={confirm}
+                contador={contador} 
+                contadorCarrito={contadorCarrito}/>
         </React.Fragment>
     )
 }
