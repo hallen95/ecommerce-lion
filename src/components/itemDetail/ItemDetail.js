@@ -25,10 +25,6 @@ const ItemDetail = ({getItem}) => {
         console.log(contadorCarrito);
         console.log(contador);
     }
-
-    const confirm = () => {
-        alert(`sus productos totales son ${contadorCarrito} y se añadirán al carrito`)
-    }
     
     return (
         <React.Fragment>
@@ -42,7 +38,6 @@ const ItemDetail = ({getItem}) => {
                 suma={suma} 
                 resta={resta} 
                 onAdd={onAdd} 
-                confirm={confirm}
                 contador={contador} 
                 contadorCarrito={contadorCarrito}/>
         </React.Fragment>

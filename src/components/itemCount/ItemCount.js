@@ -1,7 +1,8 @@
 import React from 'react'; 
 import './itemCount.css';
+import { Link } from 'react-router-dom'
 
-const ItemCount = ({suma, resta, onAdd, contador, contadorCarrito, confirm}) => {
+const ItemCount = ({suma, resta, onAdd, contador, contadorCarrito}) => {
 
     return (
         <React.Fragment>
@@ -13,9 +14,13 @@ const ItemCount = ({suma, resta, onAdd, contador, contadorCarrito, confirm}) => 
                         onClick={onAdd}>
                     agregar {contador} {contador <= 1 ? 'articulo' : 'articulos'}
                 </button>
-                {contadorCarrito && 
-            <button onClick={confirm}>{`confirmar compra por ${contadorCarrito}`}</button>}
-            </div>
+                <Link to='/cart'>
+                    {contadorCarrito && 
+                    <button>
+                        {`confirmar compra por ${contadorCarrito}`}
+                    </button>}
+                </Link>
+                </div>
         </React.Fragment>
     )
 };
