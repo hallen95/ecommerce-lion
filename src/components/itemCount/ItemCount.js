@@ -1,9 +1,23 @@
-import React from 'react'; 
+import React, { useState } from 'react'; 
 import './itemCount.css';
 import { Link } from 'react-router-dom'
 
-const ItemCount = ({suma, resta, onAdd, contador, contadorCarrito}) => {
+const ItemCount = ({stock, onAdd}) => {
+    let min = 0;
+    const [contador, setContador] = useState(0);
 
+    const suma = () => {
+        contador >= stock ? 
+        alert('alerta superaste el stock') 
+        : setContador(contador + 1)
+    }
+
+    const resta = () => {
+        contador > min ?
+        setContador(contador - 1)
+        : alert('el valor no puede ser menor a 0')
+    }
+    
     return (
         <React.Fragment>
             <div className="botones-wrapper">
@@ -11,16 +25,13 @@ const ItemCount = ({suma, resta, onAdd, contador, contadorCarrito}) => {
                 <p>{contador} </p>
                 <button className="botones-counter" onClick={resta}>-</button>
                 <button disabled={contador < 1}
-                        onClick={onAdd}>
-                    agregar {contador} {contador <= 1 ? 'articulo' : 'articulos'}
+                        onClick={() => onAdd(contador)}>
+                        agregar {contador} {contador <= 1 ? 'articulo' : 'articulos'}
                 </button>
-                <Link to='/cart'>
-                    {contadorCarrito && 
-                    <button>
-                        {`confirmar compra por ${contadorCarrito}`}
-                    </button>}
-                </Link>
-                </div>
+                {/* <Link to='/cart'>
+                    <button >añadir producto</button>
+                </Link>  */}
+            </div>
         </React.Fragment>
     )
 };

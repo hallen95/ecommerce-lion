@@ -16,7 +16,7 @@ const productos2 = [{
 
                     {
                         id: 2,
-                        nombre: 'Gel acondicionador ExtraGloss',
+                        nombre: '   ',
                         marca: 'Ternnova',
                         descripcion: 'ESTE GEL ESTÁ ESPECIALMENTE FORMULADO PARA LA RECUPERACIÓN DE PLÁSTICOS QUEMADOS POR EL SOL Y MANTENIMIENTO DE AQUELLOS QUE SEAN NUEVOS. DA UN EFECTO INCREÍBLE SOBRE LOS PLÁSTICOS EXTERIORES DE SU VEHÍCULO. OTORGA PROLONGADA HUMECTACIÓN EVITANDO EL CUARTEADO PREMATURO. TIENE MUY BUENA RESISTENCIA AL AGUA Y NO SE PEGA LA TIERRA. NO CONTIENE SOLVENTES, ESO ES ALGO QUE LO DIFERENCIA DEL RESTO DE LOS PRODUCTOS!',
                         imagen:'https://i.postimg.cc/g2xV5qk9/GEL-ACONDICIONADOR-TERNNOVA-lion.png',     
@@ -57,10 +57,10 @@ function ItemDetailContainer() {
             setTimeout(() => {
                 response(productos2);
             }, 1000);
-        });
+        })
         call.then((productos2) => {
-            setItem(productos2[id -1]);
-        });
+            setItem(productos2[id -1])
+        })
     }, []);
     
     return (

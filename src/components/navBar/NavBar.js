@@ -2,8 +2,10 @@ import React from 'react'
 import { Navbar, Nav, Form, FormControl } from 'react-bootstrap'
 import CartWidget from '../cartWidget/CartWidget'
 import { Link } from 'react-router-dom'
+import useCartContext from '../../CartContext'
 
 const NavBar = () => {
+const { getItemCount } = useCartContext();
 
 return (
   <Navbar bg="light" expand="lg">
@@ -16,7 +18,7 @@ return (
         <Nav.Link href="#link">Categorias</Nav.Link>
       </Nav>
       <Form inline>
-        <CartWidget/>
+        <CartWidget/> <div>{getItemCount()}</div>
         <FormControl type="text" placeholder="buscar" className="mr-sm-2" />
       </Form>
     </Navbar.Collapse>
