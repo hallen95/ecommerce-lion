@@ -5,21 +5,28 @@ export const CartContext = createContext([]);
 const useCartContext = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-    const [items, setItems] = useState([])
+    const [cart, setCart] = useState([])
 
-    const addProduct = (item, quantity) => {
-      //
+    const [stock, setStock] = useState() //se asigna valor inicial en ItemDetail
+
+    const [addItems, setAddItems] = useState(0)
+
+    const addProduct = (itemId) => {
+      return cart.find(ticket => ticket.item.itemId === itemId)  
     }
+    const addMoreToCart = (itemId, addItems) => {  //mergeDuplicate -> CartModal.js
+        addProduct(itemId).quantity += addItems
+  }
     const deleteProduct = itemId => {
       //
     }
     const getItemCount = () => {
-      return 10;
+      //
     }
 
-    return <CartContext.Provider value={{ items, addProduct, deleteProduct, getItemCount }}>
+    return (<CartContext.Provider value={{ cart, setCart, stock, setStock, addItems, setAddItems, addProduct, addMoreToCart, deleteProduct, getItemCount }}>
                 {children}
-            </CartContext.Provider>
+            </CartContext.Provider>)
   }
 
   export default useCartContext;

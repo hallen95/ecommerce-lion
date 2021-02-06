@@ -1,68 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './itemlistcontainer.css';
 import ItemList from '../itemList/ItemList';
-import imagenes from '../../photos/Imagenes'
+import { getCatalog } from '../../backend/catalog'
 import { useParams } from 'react-router-dom'
 
-const productos = [
-    {
-        id: 1,
-        nombre: 'Original Finish',
-        marca: 'Ternnova',
-        imagen: imagenes.img1, 
-        precio: 1250,
-        categoria: 'shampoo'
-    },
-
-    {
-        id: 2,
-        nombre: 'Gel ExtraGloss',
-        marca: 'Ternnova',
-        imagen: imagenes.img3,
-        precio: 1250,
-        categoria: 'shampoo'
-    },
-
-    {   id: 3,
-        nombre: 'Iron Hunter',
-        marca: 'Ternnova',
-        imagen: imagenes.img2,
-        precio: 1200,
-        categoria: 'desengrasante'
-    },
-
-    {   id: 4,
-        nombre: 'Petroleum',
-        marca: 'Ternnova',
-        imagen: imagenes.img4,
-        precio: 1400,
-        categoria: 'desengrasante'
-    }
-]
-
 const ItemListContainer = () => {
-    const [estado, setState] = useState([]);
+    const [state, setState] = useState([]);
     const { categoryId } = useParams();
 
-    useEffect(() => {
-    console.log(categoryId);
+    useEffect(()=> {  //Al cambiar el estado local, el componente se reenderiza y entra en loop [la promise siempre se deja para el final]
+        getCatalog().then((result) => {
+        if(categoryId) {
+          const filter = result.filter(products => products.categoria.some(targets => targets.catId === categoryId))
+          filter.length && setState(filter)
+        } else {
+          setState(result)
+        }
+      })
+      return () => setState([]) 
     }, [categoryId])
-    
-    useEffect(() => {
-        const call = new Promise((response, reject) => {
-            setTimeout(() => {
-                response(productos);
-            }, 2000)
-        })
-
-        call.then((productos) => {
-            setState(productos);
-        })    
-    }, [] )
-
 
     return (
-                    <ItemList  products={estado}/>
+                    <ItemList  products={state}/>
     )
 }
 

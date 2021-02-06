@@ -1,33 +1,34 @@
-import React, { useState } from 'react'; 
+import React, { useEffect } from 'react'; 
 import './itemCount.css';
-import { Link } from 'react-router-dom'
+import CartWidget from '../cartWidget/CartWidget'
 
-const ItemCount = ({stock, onAdd}) => {
-    let min = 0;
-    const [contador, setContador] = useState(0);
+const ItemCount = ({init, stock, setModal, suma, resta, contador, setContador, setAddItems}) => {
 
-    const suma = () => {
-        contador >= stock ? 
-        alert('alerta superaste el stock') 
-        : setContador(contador + 1)
+    const onAdd = () => {
+        setModal(true)
+        setAddItems(contador)
     }
 
-    const resta = () => {
-        contador > min ?
-        setContador(contador - 1)
-        : alert('el valor no puede ser menor a 0')
-    }
-    
+    useEffect(() => {
+        stock === 0 && setContador(0)
+        return () => {setContador(init)}
+    }, [stock, init])
+
     return (
         <React.Fragment>
             <div className="botones-wrapper">
                 <button className="botones-counter" onClick={suma}>+</button>
                 <p>{contador} </p>
                 <button className="botones-counter" onClick={resta}>-</button>
-                <button disabled={contador < 1}
-                        onClick={() => onAdd(contador)}>
-                        agregar {contador} {contador <= 1 ? 'articulo' : 'articulos'}
-                </button>
+                {
+                stock > 0 ?
+                <button disabled={contador === 0}
+                        onClick={onAdd}>
+                        agregar {contador > 0 && `${contador}`} <CartWidget/>
+                </button> 
+                :
+                <button disabled>Sin stock</button>
+                }
                 {/* <Link to='/cart'>
                     <button >añadir producto</button>
                 </Link>  */}
