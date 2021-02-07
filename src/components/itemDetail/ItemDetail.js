@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react' // rfc 
+import React, { useState } from 'react' // rfc 
 import './itemDetail.css'
 import ItemCount from '../itemCount/ItemCount'
 import useCartContext from '../../CartContext'
 import ModalCart from '../modalCart/ModalCart'
 
 
-const ItemDetail = ({getItem, id}) => {
+const ItemDetail = ({getItem}) => {
     let min = 0;
     const { cart, setCart } = useCartContext();
-    
-    const { stock, setStock } = useCartContext();
     
     const { addItems, setAddItems } = useCartContext();
     
@@ -18,9 +16,10 @@ const ItemDetail = ({getItem, id}) => {
     const [modal, setModal] = useState(false);
 
     const suma = () => {
-        contador >= stock ? 
-        alert('alerta superaste el stock') 
-        : setContador(contador + 1)
+        let stock = getItem.stock
+        contador <= stock ? 
+        setContador(contador + 1)
+        : alert('alerta superaste el stock') 
     }
 
     const resta = () => {
@@ -29,13 +28,9 @@ const ItemDetail = ({getItem, id}) => {
         : alert('el valor no puede ser menor a 0')
     }
 
-    useEffect(()=> { 
-        setStock(getItem.stock)
-    }, [setStock, getItem.stock])
-
-    useEffect(() => {
-        console.log("Modal:", modal)
-      }, [modal])
+    // useEffect(() => {
+    //     console.log("Modal:", modal)
+    //   }, [modal])
 
     // const { id } = useParams();
 
@@ -52,16 +47,15 @@ const ItemDetail = ({getItem, id}) => {
             <img  src={getItem.imagen_detail} alt="foto del producto Terrnova de Lion"/>
             <div>{getItem.descripcion}</div>
             </div>
-            <ItemCount init={1} stock={stock} setModal={setModal}
-                        suma={suma} resta={resta} setAddItems={setAddItems} 
-                        contador={contador} setContador={setContador}/>
+            <ItemCount  setModal={setModal} contador={contador}
+                        suma={suma} resta={resta} setAddItems={setAddItems}/>
             <div>
                 {modal ? 
                  <ModalCart 
                     getItem={getItem} setModal={setModal} modal={modal}
-                    addItems={addItems} setAddItems={setAddItems} stock={stock}
-                    setStock={setStock} cart={cart} setCart={setCart} 
-                    id={id} contador={contador} />
+                    addItems={addItems} setAddItems={setAddItems} 
+                    cart={cart} setCart={setCart} 
+                    contador={contador} />
                 : null}
             </div>
         </React.Fragment>

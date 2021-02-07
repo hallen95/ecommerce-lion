@@ -1,18 +1,13 @@
-import React, { useEffect } from 'react'; 
+import React from 'react'; 
 import './itemCount.css';
-import CartWidget from '../cartWidget/CartWidget'
+import { FiShoppingCart } from 'react-icons/fi';
 
-const ItemCount = ({init, stock, setModal, suma, resta, contador, setContador, setAddItems}) => {
+const ItemCount = ({setModal, suma, resta, contador, setAddItems}) => {
 
     const onAdd = () => {
         setModal(true)
         setAddItems(contador)
     }
-
-    useEffect(() => {
-        stock === 0 && setContador(0)
-        return () => {setContador(init)}
-    }, [stock, init])
 
     return (
         <React.Fragment>
@@ -21,13 +16,11 @@ const ItemCount = ({init, stock, setModal, suma, resta, contador, setContador, s
                 <p>{contador} </p>
                 <button className="botones-counter" onClick={resta}>-</button>
                 {
-                stock > 0 ?
+                contador > 0 &&
                 <button disabled={contador === 0}
                         onClick={onAdd}>
-                        agregar {contador > 0 && `${contador}`} <CartWidget/>
+                        agregar {contador && `${contador}`}{FiShoppingCart}
                 </button> 
-                :
-                <button disabled>Sin stock</button>
                 }
                 {/* <Link to='/cart'>
                     <button >añadir producto</button>

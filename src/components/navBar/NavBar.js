@@ -9,7 +9,7 @@ const NavBar = () => {
   
   const [categories, setCategories] = useState([]);
   
-  const {cart, setCart } = useCartContext();
+  const {cart} = useCartContext();
 
   useEffect(() =>{
     getCategories().then((result) => {
@@ -35,7 +35,7 @@ const NavBar = () => {
         </NavDropdown>
         </Nav>
         <Form inline>
-          <CartWidget/> {cart}
+          <CartWidget/>
           <FormControl type="text" placeholder="buscar" className="mr-sm-2" />
         </Form>
       </Navbar.Collapse>

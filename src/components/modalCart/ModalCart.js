@@ -3,9 +3,7 @@ import { Modal, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import useCartContext from '../../CartContext'
 
-const ModalCart = ({getItem, setModal, modal, addItems, setAddItems, stock, setStock, cart, setCart, id, contador}) => {
-
-const [show, setShow] = useState(modal);
+const ModalCart = ({getItem, setModal, modal, addItems, setAddItems, cart, setCart, contador}) => {
 // recibir el contexto del useCart y el cart 
 const { addProduct, addMoreToCart } = useCartContext();
 
@@ -15,29 +13,26 @@ const [goCart, setGoCart] = useState(false)
 //----.testing code.----- // 
 
   const handleClose = () => {
-    setAddItems(addItems - addItems);
+    setAddItems(0);
     setModal(false);
   }
 
   useEffect(() => {
     setPurchase(
     {   item: {
-            productoId: id,
+            productoId: getItem.id,
             name: getItem.nombre,
             precio: getItem.precio,
-            stock: getItem.stock,
         },
         quantity: addItems 
     })
-}, [id, getItem.nombre])
+}, [getItem, addItems])
+
+  console.log(addItems);
 
   const confirm = () => {
-    setStock(stock - addItems)
-    const handleDuplicate = () => {
-    addProduct(id) ? addMoreToCart(id, addItems) : setCart(cart => [...cart, purchase])
-    }
 
-    !cart.length ? setCart(cart => [...cart, purchase]) : handleDuplicate()
+    addProduct(getItem) ? addMoreToCart(getItem.id, addItems) : setCart([...cart, purchase])
     setTimeout(() => {
         setGoCart(true)
     }, 1000);
@@ -49,7 +44,7 @@ const [goCart, setGoCart] = useState(false)
    
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={modal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Confirma la compra de este Producto</Modal.Title>
         </Modal.Header>
