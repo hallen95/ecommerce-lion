@@ -3,9 +3,11 @@ import './itemlistcontainer.css';
 import ItemList from '../itemList/ItemList';
 import { getCatalog } from '../../backend/catalog'
 import { useParams } from 'react-router-dom'
+import  Loader  from '../loader/Loader'
 
 const ItemListContainer = () => {
     const [state, setState] = useState([]);
+    const [loading, setLoading] = useState(false);
     const { categoryId } = useParams();
 
     useEffect(()=> {  //Al cambiar el estado local, el componente se reenderiza y entra en loop [la promise siempre se deja para el final]
@@ -20,8 +22,18 @@ const ItemListContainer = () => {
       return () => setState([]) 
     }, [categoryId])
 
-    return (
-                    <ItemList  products={state}/>
+      useEffect(()=> {
+        setTimeout(()=> {
+          setLoading(true)
+        }, 2000)
+      },[loading])
+      
+    return ( 
+              <>
+              <ItemList  products={state}/>
+              {!state.length &&     
+                <Loader/>}
+              </>
     )
 }
 

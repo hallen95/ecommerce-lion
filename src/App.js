@@ -7,7 +7,6 @@ import Cart from './components/cart/Cart'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { CartProvider } from './CartContext';
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -21,7 +20,7 @@ function App() {
             <ItemListContainer/>
           </Route>
           <Route exact path='/item/:id'>
-            <ItemDetailContainer />
+            <ItemDetailContainer/>
           </Route>
           <Route exact path='/cart'>
             <Cart/>

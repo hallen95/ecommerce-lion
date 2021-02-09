@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useCartContext from '../../CartContext'
 import { BsDash, BsPlus, BsFillXCircleFill } from "react-icons/bs"
 import './cart.css'
@@ -7,7 +7,7 @@ function Cart() {
     const { cart } = useCartContext();
     const {addItems} = useCartContext();
     const { edit} = useCartContext();
-    const { editing, save, sum, subst } = useCartContext();
+    const { editing, save, sum, subst, total } = useCartContext();
     console.log(cart)
 
     return (
@@ -82,6 +82,14 @@ function Cart() {
                 </ul>
             </div>         
             }
+                <div className="controls__total">
+                    <div className="total__row">
+                        <span>Subtotal:</span> <span className="span__price">AR$ {total()}</span>
+                    </div>
+                    <div className="total__row">
+                        <span>Total:</span> <span className="span__price">AR$ {total()}</span>
+                    </div>
+                </div>
         </div>
     )
 }

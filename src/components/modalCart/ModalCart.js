@@ -28,8 +28,6 @@ const [goCart, setGoCart] = useState(false)
     })
 }, [getItem, addItems])
 
-  console.log(addItems);
-
   const confirm = () => {
 
     addProduct(getItem) ? addMoreToCart(getItem.id, addItems) : setCart([...cart, purchase])
@@ -38,9 +36,6 @@ const [goCart, setGoCart] = useState(false)
     }, 1000);
    }
   // const handleShow = () => setShow(true); 
-   useEffect(()=> {
-     console.log("goCart", goCart)
-   }, [goCart])
    
   return (
     <>

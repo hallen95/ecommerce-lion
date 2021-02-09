@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react';
 import { getProductById } from '../../backend/catalog';
 import { useParams } from 'react-router-dom';
 import ItemDetail from '../itemDetail/ItemDetail';
-
+import Loader from '../loader/Loader'
                 
 function ItemDetailContainer() {
 
@@ -17,10 +17,9 @@ function ItemDetailContainer() {
 
     return (
                     <>
-                    {item.hasOwnProperty("id") ? 
+                    {item ? 
                     <ItemDetail getItem={item} id={id} /> 
-                    : <h2>cargando</h2>
-                    }   
+                    : <Loader/>}
                     </>
     );
 }

@@ -12,9 +12,9 @@ const ItemCount = ({setModal, suma, resta, contador, setAddItems}) => {
     return (
         <React.Fragment>
             <div className="botones-wrapper">
-                <button className="botones-counter" onClick={suma}>+</button>
-                <p>{contador} </p>
                 <button className="botones-counter" onClick={resta}>-</button>
+                <p>{contador} </p>
+                <button className="botones-counter" onClick={suma}>+</button>
                 {
                 contador > 0 &&
                 <button disabled={contador === 0}

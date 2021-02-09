@@ -40,10 +40,22 @@ export const CartProvider = ({ children }) => {
       setAddItems(addItems - 1)
     }
 
+    const total = () => { 
+      let subtotal = []
+      let sum = 0
+      cart.map(purchase => {
+          return subtotal.push(purchase.item.precio * purchase.quantity)
+      })
+      subtotal.length < 2 ? sum = (subtotal[0])
+      : subtotal.reduce((accumulator, currentValue) => {
+          return sum = (accumulator + currentValue)
+      })
+      return sum
+  }
     return (<CartContext.Provider 
               value={{ cart, setCart, addItems, setAddItems, 
               addProduct, addMoreToCart, deleteProduct, 
-              editing, save, sum, subst, edit }}>
+              editing, save, sum, subst, edit, total }}>
                   {children}
             </CartContext.Provider>)
   }
