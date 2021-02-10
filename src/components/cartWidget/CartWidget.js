@@ -3,7 +3,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { Link } from 'react-router-dom'
 import './cartwidget.css';
 
-import useCartContext from '../../CartContext'
+import useCartContext from '../../context/CartContext'
 
 const CartWidget = () => {
     const { cart } = useCartContext();

@@ -18,6 +18,10 @@ export const CartProvider = ({ children }) => {
         addProduct(itemId).quantity += addItems
     }
 
+    const agregarProducto = (items, quantity) => {
+      setCart([...cart, {items, quantity}])
+    }
+
     const deleteProduct = itemId => {
       //
     }

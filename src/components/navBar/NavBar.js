@@ -3,7 +3,7 @@ import { Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap'
 import CartWidget from '../cartWidget/CartWidget'
 import { getCategories } from '../../backend/catalog'
 import { Link } from 'react-router-dom'
-import useCartContext from '../../CartContext'
+import useCartContext from '../../context/CartContext'
 
 const NavBar = () => {
   

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import useCartContext from '../../CartContext'
+import useCartContext from '../../context/CartContext'
 import { BsDash, BsPlus, BsFillXCircleFill } from "react-icons/bs"
 import './cart.css'
 

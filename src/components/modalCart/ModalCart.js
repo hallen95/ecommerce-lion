@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
-import useCartContext from '../../CartContext'
+import useCartContext from '../../context/CartContext'
 
 const ModalCart = ({getItem, setModal, modal, addItems, setAddItems, cart, setCart, contador}) => {
 // recibir el contexto del useCart y el cart 
 const { addProduct, addMoreToCart } = useCartContext();
-
-//----.testing code.----- // 
 const [purchase, setPurchase] = useState({})
 const [goCart, setGoCart] = useState(false)
-//----.testing code.----- // 
 
   const handleClose = () => {
     setAddItems(0);
@@ -35,6 +32,7 @@ const [goCart, setGoCart] = useState(false)
         setGoCart(true)
     }, 1000);
    }
+   
   // const handleShow = () => setShow(true); 
    
   return (
