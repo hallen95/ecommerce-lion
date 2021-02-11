@@ -8,7 +8,6 @@ function Cart() {
     const {addItems} = useCartContext();
     const { edit} = useCartContext();
     const { editing, save, sum, subst, total } = useCartContext();
-    console.log(cart)
 
     return (
     <div className="contendor__carrito" style={{height: cart.length > 2 && "100%"}}>

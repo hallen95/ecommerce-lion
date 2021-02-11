@@ -6,9 +6,7 @@ const useCartContext = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([])
-
     const [addItems, setAddItems] = useState(0)
-    const [edit, setEdit] = useState(false)
 
     const addProduct = (itemId) => {
       return cart.find(ticket => ticket.item.itemId === itemId)  
@@ -25,23 +23,21 @@ export const CartProvider = ({ children }) => {
     const deleteProduct = itemId => {
       //
     }
-
-    const editing = () => {
-        // ??? acá tendría que usar algo que detecte el bookId para cada index del map
-        setEdit(true)
-    }
-
-    const save = () => {
-      setEdit(false)
-      setAddItems(addItems)
-   }
-
-    const sum = () => {
-      setAddItems(addItems + 1)
-    } 
-
-    const subst = () => {
-      setAddItems(addItems - 1)
+    //CartWidget
+    const cartCounter = () => {
+// o sea que a esta altura cart ya recibe el purcharse
+      let totalItems = [];
+      let sum = 0;
+        cart.map(purchase => {
+            return totalItems.push(purchase.quantity)
+        });
+        totalItems.length < 2 ?
+        sum = totalItems[0]
+        :
+        totalItems.reduce((accumulator, currentValue) => {
+            return sum = accumulator + currentValue
+        })
+        return sum;
     }
 
     const total = () => { 
@@ -58,8 +54,8 @@ export const CartProvider = ({ children }) => {
   }
     return (<CartContext.Provider 
               value={{ cart, setCart, addItems, setAddItems, 
-              addProduct, addMoreToCart, deleteProduct, 
-              editing, save, sum, subst, edit, total }}>
+              addProduct, addMoreToCart, deleteProduct,
+               total, cartCounter }}>
                   {children}
             </CartContext.Provider>)
   }
