@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState } from 'react'
+import React, {createContext, useContext, useEffect, useState } from 'react'
 
 export const CartContext = createContext([]);
 
@@ -8,24 +8,55 @@ export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([])
     const [addItems, setAddItems] = useState(0)
 
-    const addProduct = (itemId) => {
+    // {* CART VIEW *}
+    const addProduct = (getItem, addItems) => {
+      let purchase = {
+       item: {
+              itemId: getItem.id,
+              name: getItem.title,
+              precio: getItem.price,
+              foto: getItem.tumbnail
+          },
+          quantity: addItems 
+        }
+        handleDuplicate(purchase, purchase.item.itemId, addItems)
+    }
+    // {* CART VIEW *}
+    const searchIdInCart = (itemId) => {
       return cart.find(ticket => ticket.item.itemId === itemId)  
     }
-
-    const addMoreToCart = (itemId, addItems) => {  //mergeDuplicate -> CartModal.js
-        addProduct(itemId).quantity += addItems
+    // {* CART VIEW *}
+    const addMoreToCart = (itemId, addItems) => {  
+        searchIdInCart(itemId).quantity += addItems
     }
-
-    const agregarProducto = (items, quantity) => {
-      setCart([...cart, {items, quantity}])
+    // {* CART VIEW *}
+    const handleDuplicate = (purchase, itemId, addItems) => {
+      cart.length && searchIdInCart(itemId) ? addMoreToCart(itemId, addItems) : setCart([...cart, purchase])
     }
-
-    const deleteProduct = itemId => {
-      //
+    // {* CART VIEW *}
+    const deleteProduct = () => {
+        setCart([])
     }
-    //CartWidget
+    const total = () => { 
+      let subtotal = []
+      let sum = 0
+      cart.map(purchase => {
+          return subtotal.push(purchase.item.precio * purchase.quantity)
+      })
+      subtotal.length < 2 ? sum = (subtotal[0])
+      : subtotal.reduce((accumulator, currentValue) => {
+          return sum = (accumulator + currentValue)
+      })
+      return sum
+  }
+  const removeFromCart = (itemId) => { //CartView
+    const filtered = cart.filter(purchase => // crea un nuevo array con todos menos el buscado
+        purchase.item.itemId !== itemId
+    )
+    setCart(filtered)
+}
+    // {* CART WIDGET/COUNTER *}
     const cartCounter = () => {
-// o sea que a esta altura cart ya recibe el purcharse
       let totalItems = [];
       let sum = 0;
         cart.map(purchase => {
@@ -39,23 +70,10 @@ export const CartProvider = ({ children }) => {
         })
         return sum;
     }
-
-    const total = () => { 
-      let subtotal = []
-      let sum = 0
-      cart.map(purchase => {
-          return subtotal.push(purchase.item.precio * purchase.quantity)
-      })
-      subtotal.length < 2 ? sum = (subtotal[0])
-      : subtotal.reduce((accumulator, currentValue) => {
-          return sum = (accumulator + currentValue)
-      })
-      return sum
-  }
     return (<CartContext.Provider 
               value={{ cart, setCart, addItems, setAddItems, 
               addProduct, addMoreToCart, deleteProduct,
-               total, cartCounter }}>
+               total, removeFromCart, cartCounter }}>
                   {children}
             </CartContext.Provider>)
   }

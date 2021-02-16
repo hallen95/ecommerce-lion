@@ -5,8 +5,7 @@ import useCartContext from '../../context/CartContext'
 
 const ModalCart = ({getItem, setModal, modal, addItems, setAddItems, cart, setCart, contador}) => {
 // recibir el contexto del useCart y el cart 
-const { addProduct, addMoreToCart } = useCartContext();
-const [purchase, setPurchase] = useState({})
+const { addProduct } = useCartContext();
 const [goCart, setGoCart] = useState(false)
 
   const handleClose = () => {
@@ -14,26 +13,23 @@ const [goCart, setGoCart] = useState(false)
     setModal(false);
   }
 
-  useEffect(() => {
-    setPurchase(
-    {   item: {
-            productoId: getItem.id,
-            name: getItem.nombre,
-            precio: getItem.precio,
-        },
-        quantity: addItems 
-    })
-}, [getItem, addItems])
+//   useEffect(() => {
+//     setPurchase(
+//     {   item: {
+//             productoId: getItem.id,
+//             name: getItem.nombre,
+//             precio: getItem.precio,
+//         },
+//         quantity: addItems 
+//     })
+// }, [getItem, addItems])
 
   const confirm = () => {
-
-    addProduct(getItem) ? addMoreToCart(getItem.id, addItems) : setCart([...cart, purchase])
+    addProduct(getItem, addItems)
     setTimeout(() => {
-        setGoCart(true)
+        setGoCart(true) 
     }, 1000);
-   }
-   
-  // const handleShow = () => setShow(true); 
+  }
    
   return (
     <>
@@ -43,12 +39,12 @@ const [goCart, setGoCart] = useState(false)
         </Modal.Header>
         <Modal.Body>
           <div className="modal_info">
-                    <h1>{getItem.nombre}</h1>
+                    <h1>{getItem.title}</h1>
                     <h2>{getItem.marca}</h2>
                     <p>
-                      AR$ {getItem.precio}<br/>
+                      AR$ {getItem.price}<br/>
                       se agregará la cantidad de: {addItems}<strong> productos</strong><br/>
-                      por el precio de: ARS { addItems * getItem.precio }
+                      por el precio de: ARS { addItems * getItem.price }
                     </p>
           </div>
         </Modal.Body>
@@ -58,7 +54,7 @@ const [goCart, setGoCart] = useState(false)
           </Button> */}
           { !goCart &&
               <Button variant="primary" onClick={confirm}>
-                confirmar añadir al carrito por {contador}
+                confirmar añadir al carrito por {addItems}
               </Button>
           }
           { goCart &&

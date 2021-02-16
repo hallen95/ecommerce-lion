@@ -1,13 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useCartContext from '../../context/CartContext'
-import { BsDash, BsPlus, BsFillXCircleFill } from "react-icons/bs"
+import { BsFillXCircleFill } from "react-icons/bs"
 import './cart.css'
+import CartOrder from '../CartOrder/CartOrder'
+import { Link } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
+
 
 function Cart() {
-    const { cart } = useCartContext();
-    const {addItems} = useCartContext();
-    const { edit} = useCartContext();
-    const { editing, save, sum, subst, total } = useCartContext();
+    const [showForm, setShowForm] = useState(false)
+
+    const { cart, removeFromCart, deleteProduct, total } = useCartContext();
+    console.log("cart", cart);
+
+    const totalPrice = total()
+
+    const order = () => { 
+        setShowForm(true)
+    }
 
     return (
     <div className="contendor__carrito" style={{height: cart.length > 2 && "100%"}}>
@@ -22,6 +32,7 @@ function Cart() {
                     <span>Subtotal</span>
                 </div>
                 <span>Su carrito está vacío</span>
+                <Link to ={'/'}><span>Haga click para volver al menú</span></Link>
                 </div>
                 }
                 { cart.length &&
@@ -37,42 +48,27 @@ function Cart() {
                 <ul className="grid__itemlist">
                     { cart.map((purchase) => {
                         return (
-                        <li className="itemlist__item" key={purchase.item.productoId} >
+                        <li className="itemlist__item" key={purchase.item.itemId} >
                             <div className="item__data">
                                 <div className="data__main">
                                     <h2>{purchase.item.name}</h2>
                                     <h3>{purchase.item.precio}</h3>
                                 </div>
                             </div>
-                            <div className="item__edit">
-                    
-                                { !edit ? <a onClick={editing} >Editar</a> 
-                                // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                                : <a onClick={save}>Guardar</a> }
-                            </div>
                             <div className="item__pricee">
                                 <span>AR$ {purchase.item.precio}</span>
                             </div>
-                            <div className="item__quantity">
-                                { edit &&
-                                    <div className="cart__counter">
-                                    <button className="button button-cart" onClick={subst}>
-                                        <BsDash/>
-                                    </button>
-                                    <span>{addItems}</span>
-                                    <button className="button button-cart" onClick={sum} >
-                                        <BsPlus/>
-                                    </button>
-                                </div>
-                                }
-                                { !edit &&
-                                    <span>{purchase.quantity}</span>}
+                            <div className="item__pricee">
+                                <span>{purchase.quantity}</span>
                             </div>
                             <div className="item__subtotal">
                                 <span>AR$ {purchase.item.precio * purchase.quantity}</span>
                             </div>
+                            <div className="item__pricee">
+                                <img src={purchase.item.foto} alt="foto del producto"/>
+                            </div>
                             <div className="item__remove">
-                                <span><BsFillXCircleFill/></span>
+                                <span onClick={() => removeFromCart(purchase.item.itemId)}><BsFillXCircleFill/></span>
                             </div>
                         </li>
                         )
@@ -83,12 +79,14 @@ function Cart() {
             }
                 <div className="controls__total">
                     <div className="total__row">
-                        <span>Subtotal:</span> <span className="span__price">AR$ {total()}</span>
+                        <span>Subtotal:</span> <span className="span__price">AR$ {totalPrice}</span>
                     </div>
                     <div className="total__row">
-                        <span>Total:</span> <span className="span__price">AR$ {total()}</span>
+                        <span>Total:</span> <span className="span__price">AR$ {totalPrice}</span>
                     </div>
+                    <Button variant="warning" className="cartview__button purchase" onClick={() => order()}>Iniciar compra</Button>
                 </div>
+            { showForm && <CartOrder cart={cart} total={totalPrice} />}
         </div>
     )
 }

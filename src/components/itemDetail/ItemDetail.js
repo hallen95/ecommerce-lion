@@ -20,10 +20,10 @@ const ItemDetail = ({getItem}) => {
     return (
         <React.Fragment>
             <div className="itemDetailStyle"><h2>
-                {getItem.nombre}
+                {getItem.title}
             </h2>
-            <img  src={getItem.imagen_detail} alt="foto del producto Terrnova de Lion"/>
-            <div>{getItem.descripcion}</div>
+            <img  src={getItem.photodescription} alt="foto del producto Terrnova de Lion"/>
+            <div>{getItem.description}</div>
             </div>
             <ItemCount min={1} stock={getItem} handleModal={handleModal}/>
             <div>

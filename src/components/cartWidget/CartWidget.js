@@ -14,11 +14,10 @@ const CartWidget = () => {
 
     return (
         <Link to="/cart">
-        <div className="cartStyle">
-            <FiShoppingCart /> items:
-            {cartCounterWidget ? cartCounterWidget : 0}
-        </div>
-
+            <div className="cartStyle">
+                    <FiShoppingCart /> items:
+                    {cartCounterWidget ? cartCounterWidget : 0}
+            </div>
         </Link>
     )
 };

@@ -24,7 +24,6 @@ const ItemCount = ({stock, handleModal, min}) => {
     }
 
     return (
-        <React.Fragment>
             <div className="botones-wrapper">
                 <button className="botones-counter" onClick={resta}>-</button>
                 <p>{contador} </p>
@@ -32,15 +31,14 @@ const ItemCount = ({stock, handleModal, min}) => {
                 {
                 contador > 0 &&
                 <button disabled={contador === 0}
-                        onClick={onAdd}>
-                        agregar {contador && `${contador}`}{FiShoppingCart}
+                        onClick={() => onAdd()}>
+                        agregar {contador && `${contador}`}<FiShoppingCart/>
                 </button> 
                 }
                 {/* <Link to='/cart'>
                     <button >añadir producto</button>
                 </Link>  */}
             </div>
-        </React.Fragment>
     )
 };
 export default ItemCount;
