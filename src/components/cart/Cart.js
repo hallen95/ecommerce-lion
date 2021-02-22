@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import useCartContext from '../../context/CartContext'
 import { BsFillXCircleFill } from "react-icons/bs"
 import './cart.css'
@@ -8,15 +8,19 @@ import { Button } from 'react-bootstrap'
 
 
 function Cart() {
+    const [ user, setUser ] = useState({})
     const [showForm, setShowForm] = useState(false)
 
-    const { cart, removeFromCart, deleteProduct, total } = useCartContext();
-    console.log("cart", cart);
+    const { cart, removeFromCart, total } = useCartContext();
 
     const totalPrice = total()
 
     const order = () => { 
         setShowForm(true)
+    }
+
+    const handleUser = user => {
+        setUser(user)
     }
 
     return (
@@ -86,7 +90,7 @@ function Cart() {
                     </div>
                     <Button variant="warning" className="cartview__button purchase" onClick={() => order()}>Iniciar compra</Button>
                 </div>
-            { showForm && <CartOrder cart={cart} total={totalPrice} />}
+            { showForm && <CartOrder cart={cart} total={totalPrice} onValidate={handleUser} />}
         </div>
     )
 }

@@ -10,7 +10,7 @@ export const CartProvider = ({ children }) => {
 
     // {* CART VIEW *}
     const addProduct = (getItem, addItems) => {
-      let purchase = {
+      const purchase = {
        item: {
               itemId: getItem.id,
               name: getItem.title,
@@ -19,24 +19,32 @@ export const CartProvider = ({ children }) => {
           },
           quantity: addItems 
         }
-        handleDuplicate(purchase, purchase.item.itemId, addItems)
+        handleDuplicate(purchase, purchase.item.itemId, addItems);
+        cartCounter();
     }
+
     // {* CART VIEW *}
     const searchIdInCart = (itemId) => {
       return cart.find(ticket => ticket.item.itemId === itemId)  
+
     }
+
     // {* CART VIEW *}
-    const addMoreToCart = (itemId, addItems) => {  
-        searchIdInCart(itemId).quantity += addItems
+    const addMoreToCart = (itemId, addItems) => {
+      searchIdInCart(itemId).quantity += addItems
     }
+
     // {* CART VIEW *}
     const handleDuplicate = (purchase, itemId, addItems) => {
+      console.log("carrito longitud", cart.length)
       cart.length && searchIdInCart(itemId) ? addMoreToCart(itemId, addItems) : setCart([...cart, purchase])
     }
+
     // {* CART VIEW *}
     const deleteProduct = () => {
         setCart([])
     }
+
     const total = () => { 
       let subtotal = []
       let sum = 0
@@ -48,28 +56,23 @@ export const CartProvider = ({ children }) => {
           return sum = (accumulator + currentValue)
       })
       return sum
-  }
-  const removeFromCart = (itemId) => { //CartView
-    const filtered = cart.filter(purchase => // crea un nuevo array con todos menos el buscado
-        purchase.item.itemId !== itemId
-    )
-    setCart(filtered)
-}
+    }
+
+  // {* CART VIEW *}
+    const removeFromCart = (itemId) => {
+        const filtered = cart.filter(purchase => // crea un nuevo array con todos menos el buscado
+            purchase.item.itemId !== itemId
+        )
+        setCart(filtered)
+    }
+
     // {* CART WIDGET/COUNTER *}
     const cartCounter = () => {
-      let totalItems = [];
-      let sum = 0;
-        cart.map(purchase => {
-            return totalItems.push(purchase.quantity)
-        });
-        totalItems.length < 2 ?
-        sum = totalItems[0]
-        :
-        totalItems.reduce((accumulator, currentValue) => {
-            return sum = accumulator + currentValue
-        })
-        return sum;
+        return cart.reduce((acc, purchase) => {
+            return acc + purchase.quantity
+        },0)
     }
+
     return (<CartContext.Provider 
               value={{ cart, setCart, addItems, setAddItems, 
               addProduct, addMoreToCart, deleteProduct,

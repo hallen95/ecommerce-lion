@@ -33,10 +33,7 @@ const NavBar = () => {
         <NavDropdown title="Categorias" id="basic-nav-dropdown">                   
           { 
             categories.map((category) => {
-            return (
-              <NavDropdown.Item key={category.catId}>
-                <Link to={`/category/${category.catId}`}>{category.key}</Link>
-              </NavDropdown.Item> )
+            return <Link key={category.catId} to={`/category/${category.catId}`}>{category.key}</Link>
             })
           }
         <NavDropdown.Divider />

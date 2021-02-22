@@ -7,7 +7,7 @@ import  Loader  from '../loader/Loader'
 
 const ItemListContainer = () => {
     const [state, setState] = useState([]);
-    // const [loading, setLoading] = useState(false);
+    const [ loading, setLoading ] = useState(false);
     const { categoryId } = useParams();
 
     useEffect(() => {
@@ -29,16 +29,18 @@ const ItemListContainer = () => {
             })
           })
           setState(result);
-          // result.length ? setLoading(true)
+          result && setLoading(true)
         });
-        return () => setState([])
+        return () => {
+          setLoading(false);
+          setState([])
+        }
     }, [categoryId])
 
     return ( 
               <>
-              <ItemList  products={state}/>
-              {!state.length &&     
-                <Loader/>}
+              {!loading ? <Loader/> : <ItemList products={state}/>
+              }
               </>
     )
 }
