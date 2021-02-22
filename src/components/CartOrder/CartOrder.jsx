@@ -3,7 +3,7 @@ import { getFirestore } from '../../firebase'
 import firebase from "firebase/app"
 import CartForm from '../CartForm/CartForm'
 
-function CartOrder({cart, total, onValidate}) {
+function CartOrder({cart, total, setShowForm}) {
     const [userInfo, setUserInfo] = useState()
     // const [order, setOrder] = useState({})
     const [orderId, setOrderId] = useState("")
@@ -59,7 +59,7 @@ function CartOrder({cart, total, onValidate}) {
 
     return (
         <div>
-            <CartForm getInfo={getInfo} orderId={orderId}  />
+            <CartForm getInfo={getInfo} orderId={orderId} setShowForm={setShowForm} />
         </div>
     )
 }

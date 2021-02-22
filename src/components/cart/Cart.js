@@ -10,7 +10,6 @@ import { Button } from 'react-bootstrap'
 function Cart() {
     const [ user, setUser ] = useState({})
     const [showForm, setShowForm] = useState(false)
-
     const { cart, removeFromCart, total } = useCartContext();
 
     const totalPrice = total()
@@ -83,14 +82,14 @@ function Cart() {
             }
                 <div className="controls__total">
                     <div className="total__row">
-                        <span>Subtotal:</span> <span className="span__price">AR$ {totalPrice}</span>
+                        <span>Subtotal:</span> <span className="span__price">AR$ { cart.length && totalPrice }</span>
                     </div>
                     <div className="total__row">
-                        <span>Total:</span> <span className="span__price">AR$ {totalPrice}</span>
+                        <span>Total:</span> <span className="span__price">AR$ {cart.length && totalPrice }</span>
                     </div>
-                    <Button variant="warning" className="cartview__button purchase" onClick={() => order()}>Iniciar compra</Button>
+                    { cart.length && <Button variant="warning" className="cartview__button purchase" onClick={() => order()}>Iniciar compra</Button>}
                 </div>
-            { showForm && <CartOrder cart={cart} total={totalPrice} onValidate={handleUser} />}
+            { showForm && <CartOrder cart={cart} total={totalPrice} onValidate={handleUser} setShowForm={setShowForm} />}
         </div>
     )
 }
