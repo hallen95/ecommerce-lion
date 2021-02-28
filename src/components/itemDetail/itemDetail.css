@@ -1,5 +1,5 @@
 .itemDetailStyle{
-    border: red solid 1px;
+    border:blue solid 1px;
     display: flex;
     flex-direction: row;
     justify-self: center;

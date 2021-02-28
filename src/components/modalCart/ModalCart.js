@@ -3,9 +3,8 @@ import { Modal, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import useCartContext from '../../context/CartContext'
 
-const ModalCart = ({getItem, setModal, modal, addItems, setAddItems}) => {
-// recibir el contexto del useCart y el cart 
-const { addProduct } = useCartContext();
+const ModalCart = ({getItem, setModal, modal}) => {
+const { addProduct, addItems, setAddItems } = useCartContext();
 const [goCart, setGoCart] = useState(false)
 
   const handleClose = () => {

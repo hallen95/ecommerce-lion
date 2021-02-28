@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap'
+import './navbar.css'
 import CartWidget from '../cartWidget/CartWidget'
 import { getFirestore } from '../../firebase'
 import { Link } from 'react-router-dom'
@@ -27,13 +28,13 @@ const NavBar = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Link to={'/'}><Navbar.Brand>Lion</Navbar.Brand></Link>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Toggle className="dropdownestilo" aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
         <NavDropdown title="Categorias" id="basic-nav-dropdown">                   
           { 
             categories.map((category) => {
-            return <Link key={category.catId} to={`/category/${category.catId}`}>{category.key}</Link>
+            return <Link  className="dropestilo" key={category.catId} to={`/category/${category.catId}`}>{category.key}</Link>
             })
           }
         <NavDropdown.Divider />
