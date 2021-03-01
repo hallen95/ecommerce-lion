@@ -1,13 +1,12 @@
 import React from 'react';
 import { FiShoppingCart } from 'react-icons/fi';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import './cartwidget.css';
-
-import useCartContext from '../../context/CartContext'
+import useCartContext from '../../context/CartContext';
 
 const CartWidget = () => {
-    const { cart, cartCounter } = useCartContext();
     
+    const { cart, cartCounter } = useCartContext();
     const cartCounterWidget = cartCounter();
     
     cart.length && cartCounter();

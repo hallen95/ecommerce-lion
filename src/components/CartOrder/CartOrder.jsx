@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { getFirestore } from '../../firebase'
-import firebase from "firebase/app"
-import CartForm from '../CartForm/CartForm'
+import React, { useEffect, useState } from 'react';
+import { getFirestore } from '../../firebase';
+import firebase from "firebase/app";
+import "@firebase/firestore";
+import CartForm from '../CartForm/CartForm';
 
 function CartOrder({cart, total, setShowForm}) {
-    const [userInfo, setUserInfo] = useState()
-    // const [order, setOrder] = useState({})
-    const [orderId, setOrderId] = useState("")
 
-    const getInfo = (user) => {
-        setUserInfo(user);
-    }
+    const [userInfo, setUserInfo] = useState();
+    const [orderId, setOrderId] = useState("");
+
+    const getInfo = (user) => setUserInfo(user);
 
     const generateOrder = () => {
         const db = getFirestore()
@@ -20,12 +19,11 @@ function CartOrder({cart, total, setShowForm}) {
             items: cart,
             date: firebase.firestore.Timestamp.fromDate(new Date()),
             total: total
-        }
-
+        };
         orders.add(newOrder).then(({id}) => {
             setOrderId(id)
-        }).catch(error => console.log("Ha habido un error:", error))
-    }
+        }).catch(error => console.log("Ha habido un error:", error));
+    };
 
     const updateStock = () => {
         (async function () {
@@ -39,29 +37,28 @@ function CartOrder({cart, total, setShowForm}) {
             const outOfStock = [];
             query.docs.forEach((docSnapshot, index) => {
                 if(docSnapshot.data().stock >= cart[index].quantity) {
-                    batch.update(docSnapshot.ref, { stock: docSnapshot.data().stock - cart[index].quantity })
+                    batch.update(docSnapshot.ref, { stock: docSnapshot.data().stock - cart[index].quantity });
                 } else {
-                    outOfStock.push({...docSnapshot.data(), id: docSnapshot.id})
+                    outOfStock.push({...docSnapshot.data(), id: docSnapshot.id});
                 }
             })
-            outOfStock.length === 0 && await batch.commit()
+            outOfStock.length === 0 && await batch.commit();
         })()
-    }
+    };
 
     useEffect(() => {
         userInfo && generateOrder()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userInfo])
 
     useEffect(() => {
         orderId && updateStock()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[orderId])
 
-
     return (
-        <div>
             <CartForm getInfo={getInfo} orderId={orderId} setShowForm={setShowForm} />
-        </div>
     )
 }
 
-export default CartOrder
+export default CartOrder;

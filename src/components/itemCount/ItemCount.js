@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'; 
-import './itemCount.css';
+import { Button } from 'react-bootstrap';
 import { FiShoppingCart } from 'react-icons/fi';
-
 
 const ItemCount = ({stock, handleModal, initial}) => {
 
@@ -25,17 +24,17 @@ const ItemCount = ({stock, handleModal, initial}) => {
     }
 
     return (
-            <div className="botones-wrapper">
-                <button className="botones-counter" onClick={resta}>-</button>
-                <p>{contador} </p>
-                <button className="botones-counter" onClick={suma}>+</button>
-                {
-                contador > 0 &&
-                <button disabled={contador === 0}
-                        onClick={onAdd}>
-                        agregar {contador && `${contador}`}<FiShoppingCart/>
-                </button> 
-                }
+            <div style={{display:"flex", flexDirection:"row", justifyContent:"center", marginTop:"40px"}}className="botones-wrapper">
+                <Button variant="danger" style={{marginRight: "20px"}}className="botones-counter" onClick={resta}>-</Button>
+                <span  style={{fontSize:"20px"}}>{contador} </span>
+                <Button variant="danger" style={{marginLeft: "20px"}} className="botones-counter" onClick={suma}>+</Button>
+                {contador > 0 &&
+                <Button variant="warning" disabled={contador === 0}
+                        onClick={onAdd}
+                        style={{marginLeft: "20px", fontWeight:"bold", fontSize:"18px"}}>
+                        <span>agregar {contador && `${contador}`}</span>
+                        <FiShoppingCart/>
+                </Button>}
             </div>
     )
 };

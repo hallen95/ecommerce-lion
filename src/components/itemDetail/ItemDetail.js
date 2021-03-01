@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; // rfc 
+import React, { useEffect, useState } from 'react'; 
 import './itemDetail.css';
 import ItemCount from '../itemCount/ItemCount';
 import useCartContext from '../../context/CartContext';
@@ -6,11 +6,9 @@ import ModalCart from '../modalCart/ModalCart';
     
 
 const ItemDetail = ({getItem}) => {
+
     const { cart, setCart, stock, setStock } = useCartContext();
     const [addItems, setAddItems] = useState(0)
-
-    // const { setAddItems } = useCartContext(); BORRADO 28-02
-    console.log("stock", getItem.stock)
     const [modal, setModal] = useState(false);
 
     const handleModal = (contador) => {
@@ -33,7 +31,7 @@ const ItemDetail = ({getItem}) => {
             <ItemCount initial={1} stock={stock} handleModal={handleModal}/>
             <div>
                 {modal ? 
-                 <ModalCart 
+                 <ModalCart
                     getItem={getItem} setModal={setModal} modal={modal} stock={stock} setStock={setStock}
                     cart={cart} setCart={setCart} addItems={addItems} setAddItems={setAddItems}
                      />

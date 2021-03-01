@@ -5,6 +5,7 @@ import { getFirestore } from '../../firebase';
 import  Loader  from '../loader/Loader';
 
 const ItemListContainer = () => {
+
     const [state, setState] = useState([]);
     const [ loading, setLoading ] = useState(false);
     const { categoryId } = useParams();
@@ -38,7 +39,8 @@ const ItemListContainer = () => {
 
     return ( 
               <>
-              {!loading ? <Loader/> : <ItemList products={state}/>
+              {!loading ? <span style={{display:'flex', justifyContent:'center', fontSize:"40px"}}><Loader/></span> 
+              : <ItemList products={state}/>
               }
               </>
     )

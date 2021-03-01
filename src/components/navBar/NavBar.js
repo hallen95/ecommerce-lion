@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap'
-import './navbar.css'
-import CartWidget from '../cartWidget/CartWidget'
-import { getFirestore } from '../../firebase'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import './navbar.css';
+import CartWidget from '../cartWidget/CartWidget';
+import { getFirestore } from '../../firebase';
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
   
@@ -40,10 +40,7 @@ const NavBar = () => {
         <NavDropdown.Divider />
         </NavDropdown>
         </Nav>
-        <Form inline>
-          <CartWidget/>
-          <FormControl type="text" placeholder="buscar" className="mr-sm-2" />
-        </Form>
+        <CartWidget/>
       </Navbar.Collapse>
     </Navbar>
     )

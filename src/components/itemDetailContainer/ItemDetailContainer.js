@@ -9,8 +9,8 @@ function ItemDetailContainer() {
 
     const [item, setItem] = useState({}); 
     const [loading, setLoading] = useState(true);
-    const { itemId } = useParams();
     const [ notFound, setNotFound ] = useState(false);
+    const { itemId } = useParams();
     
     useEffect(() => {
         const db = getFirestore();
@@ -21,7 +21,6 @@ function ItemDetailContainer() {
                 setNotFound(true);
                 return;
             }
-            console.log('item found!')
             setItem({ id: doc.id, ...doc.data()});
 
         }).catch((error) => {console.log(`error en ${error}`)})
@@ -31,12 +30,11 @@ function ItemDetailContainer() {
     }, [itemId])
 
     return (
-                    <>
-                    {loading && !notFound ? <Loader/>
-                    : !loading && notFound ? <NotFound/>
-                    : <ItemDetail loading={loading} getItem={item} /> 
-                    }
-                    </>
+        <React.Fragment>
+            {loading && !notFound ? <span style={{display:'flex', justifyContent:'center', fontSize:"40px"}}><Loader/></span>
+            : !loading && notFound ? <NotFound/>
+            : <ItemDetail loading={loading} getItem={item} /> }
+        </React.Fragment>
     );
 }
 export default ItemDetailContainer;

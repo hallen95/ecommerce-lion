@@ -1,44 +1,42 @@
-import React, { useState } from 'react'
-import './cartForm.css'
-import OrderModal from '../orderModal/OrderModal'
+import React, { useState } from 'react';
+import './cartForm.css';
+import OrderModal from '../orderModal/OrderModal';
 
 function CartForm({getInfo, orderId, setShowForm}) {
-    const [formData, setFormData] = useState({
-        name: '',
-        surname: '',
-        phone: '',
-        email: '',
-        emailVerification: '',
-      });
+
+  const [formData, setFormData] = useState({
+      name: '',
+      surname: '',
+      phone: '',
+      email: '',
+      emailVerification: '',
+    });
+  const [ orderModal, setOrderModal ] = useState(false);
     
-    const [ orderModal, setOrderModal ] = useState(false);
-      
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (
-          formData.name === '' ||
-          formData.surname === '' ||
-          formData.phone === '' ||
-          formData.email === '' ||
-          formData.emailVerification === ''
-        ) {
-          alert('Llená todos los campos.');
-        } else {
-          if (formData.email !== formData.emailVerification) {
-            alert('Verifica que tu correo electrónico coincida en ambas casillas.');
-          } else {
-            getInfo(formData);
-            setOrderModal(true);
-          }
-        }
-      };
-    
-      const handleChange = (event) => {
-        setFormData({ ...formData, [event.target.id]: event.target.value });
-      };
-    
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (
+      formData.name === '' ||
+      formData.surname === '' ||
+      formData.phone === '' ||
+      formData.email === '' ||
+      formData.emailVerification === ''
+    ) {
+      alert('Llená todos los campos.');
+    } else {
+      if (formData.email !== formData.emailVerification) {
+        alert('Verifica que tu correo electrónico coincida en ambas casillas.');
+      } else {
+        getInfo(formData);
+        setOrderModal(true);
+      }
+    }
+  };
+  
+  const handleChange = (event) => { setFormData({ ...formData, [event.target.id]: event.target.value })};
+  
       return (
-        <>
+        <React.Fragment>
           <form className="whole-form">
             <h2>Datos de compra</h2>
             <div className="form-item">
@@ -92,8 +90,8 @@ function CartForm({getInfo, orderId, setShowForm}) {
           </form>
           {orderModal && <OrderModal orderModal={orderModal} setOrderModal={setOrderModal}
             setFormData={setFormData} orderId={orderId} setShowForm={setShowForm}/>}
-        </>
+        </React.Fragment>
       );
     };
 
-export default CartForm
+export default CartForm;
