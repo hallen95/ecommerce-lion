@@ -3,17 +3,20 @@ import { Modal, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import useCartContext from '../../context/CartContext'
 
-const ModalCart = ({getItem, setModal, modal}) => {
-const { addProduct, addItems, setAddItems } = useCartContext();
-const [goCart, setGoCart] = useState(false)
+const ModalCart = ({ getItem, setModal, modal, addItems, setAddItems, stock, setStock }) => {
 
+  const [goCart, setGoCart] = useState(false)
+  const { addProduct } = useCartContext();
+  console.log("stock", stock)
   const handleClose = () => {
     setAddItems(0);
     setModal(false);
   }
 
   const confirm = () => {
+    setStock(getItem.stock - addItems)
     addProduct(getItem, addItems)
+    
     setTimeout(() => {
         setGoCart(true) 
     }, 1000);
@@ -37,9 +40,6 @@ const [goCart, setGoCart] = useState(false)
           </div>
         </Modal.Body>
         <Modal.Footer>
-          {/* <Button variant="secondary" onClick={handleClose}>
-            Cerrar
-          </Button> */}
           { !goCart &&
               <Button variant="primary" onClick={confirm}>
                 confirmar añadir al carrito por {addItems}

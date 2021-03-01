@@ -12,12 +12,11 @@ const CartWidget = () => {
     
     cart.length && cartCounter();
 
-
     return (
         <Link to="/cart">
             <div className="cartStyle">
                     <FiShoppingCart /> 
-                    <p> items:{cartCounterWidget ? cartCounterWidget : 0} </p>
+                    <p> items:{cartCounterWidget ? cartCounter() : 0} </p>
             </div>
         </Link>
     )

@@ -34,7 +34,7 @@ const NavBar = () => {
         <NavDropdown title="Categorias" id="basic-nav-dropdown">                   
           { 
             categories.map((category) => {
-            return <Link  className="dropestilo" key={category.catId} to={`/category/${category.catId}`}>{category.key}</Link>
+            return <Link  className="dropestilo" key={category.catId} to={`/categories/${category.nombre}/${category.catId}`}>{category.key}</Link>
             })
           }
         <NavDropdown.Divider />

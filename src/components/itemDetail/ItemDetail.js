@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // rfc 
+import React, { useEffect, useState } from 'react'; // rfc 
 import './itemDetail.css';
 import ItemCount from '../itemCount/ItemCount';
 import useCartContext from '../../context/CartContext';
@@ -6,16 +6,21 @@ import ModalCart from '../modalCart/ModalCart';
     
 
 const ItemDetail = ({getItem}) => {
-    const { cart, setCart } = useCartContext();
-    
-    const { setAddItems } = useCartContext();
+    const { cart, setCart, stock, setStock } = useCartContext();
+    const [addItems, setAddItems] = useState(0)
 
+    // const { setAddItems } = useCartContext(); BORRADO 28-02
+    console.log("stock", getItem.stock)
     const [modal, setModal] = useState(false);
 
     const handleModal = (contador) => {
         setModal(true)
         setAddItems(contador)
     }
+
+    useEffect(()=> { 
+        setStock(getItem.stock)
+    }, [setStock, getItem.stock])
 
     return (
         <React.Fragment>
@@ -25,12 +30,12 @@ const ItemDetail = ({getItem}) => {
             <img  src={getItem.photodescription} alt="foto del producto Terrnova de Lion"/>
             <div>{getItem.description}</div>
             </div>
-            <ItemCount min={1} stock={getItem} handleModal={handleModal}/>
+            <ItemCount initial={1} stock={stock} handleModal={handleModal}/>
             <div>
                 {modal ? 
                  <ModalCart 
-                    getItem={getItem} setModal={setModal} modal={modal}
-                    cart={cart} setCart={setCart} 
+                    getItem={getItem} setModal={setModal} modal={modal} stock={stock} setStock={setStock}
+                    cart={cart} setCart={setCart} addItems={addItems} setAddItems={setAddItems}
                      />
                 : null}
             </div>

@@ -25,7 +25,7 @@ const OrderModal = ({orderModal, setOrderModal, setFormData, orderId, setShowFor
                   <Modal.Header closeButton>
                     <Modal.Title>Muchas gracias por su compra!</Modal.Title>
                   </Modal.Header>
-                  <Modal.Body>{`Codigo generado automático: ${orderId} `}</Modal.Body>
+                  <Modal.Body>{`Codigo generado automático, por favor mantengalo consigo: ${orderId}`}</Modal.Body>
                   <Modal.Footer>
                     <Button variant="primary" onClick={handleClose}>
                       Entendido

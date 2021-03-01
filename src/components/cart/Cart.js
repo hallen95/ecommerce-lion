@@ -87,7 +87,7 @@ function Cart() {
                     <div className="total__row">
                         <span>Total:</span> <span className="span__price">AR$ {cart.length && totalPrice }</span>
                     </div>
-                    { cart.length && <Button variant="warning" className="cartview__button purchase" onClick={() => order()}>Iniciar compra</Button>}
+                    { cart.length > 0 && <Button variant="warning" className="cartview__button purchase" onClick={() => order()}>Iniciar compra</Button>}
                 </div>
             { showForm && <CartOrder cart={cart} total={totalPrice} onValidate={handleUser} setShowForm={setShowForm} />}
         </div>

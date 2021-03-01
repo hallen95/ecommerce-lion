@@ -6,7 +6,8 @@ const useCartContext = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([])
-    const [addItems, setAddItems] = useState(0)
+
+    const [stock, setStock] = useState() 
 
     // {* CART VIEW *}
     const addProduct = (getItem, addItems) => {
@@ -15,13 +16,14 @@ export const CartProvider = ({ children }) => {
               itemId: getItem.id,
               name: getItem.title,
               precio: getItem.price,
-              foto: getItem.tumbnail
+              foto: getItem.tumbnail,
+              stock: getItem.stock
           },
           quantity: addItems 
         }
         handleDuplicate(purchase, purchase.item.itemId, addItems);
         cartCounter();
-    }
+      }
 
     // {* CART VIEW *}
     const searchIdInCart = (itemId) => {
@@ -31,12 +33,12 @@ export const CartProvider = ({ children }) => {
 
     // {* CART VIEW *}
     const addMoreToCart = (itemId, addItems) => {
-      searchIdInCart(itemId).quantity += addItems
+      searchIdInCart(itemId).quantity += addItems;
+
     }
 
     // {* CART VIEW *}
     const handleDuplicate = (purchase, itemId, addItems) => {
-      console.log("carrito longitud", cart.length)
       cart.length && searchIdInCart(itemId) ? addMoreToCart(itemId, addItems) : setCart([...cart, purchase])
     }
 
@@ -74,7 +76,7 @@ export const CartProvider = ({ children }) => {
     }
 
     return (<CartContext.Provider 
-              value={{ cart, setCart, addItems, setAddItems, 
+              value={{ cart, setCart, stock, setStock,
               addProduct, addMoreToCart, deleteProduct,
                total, removeFromCart, cartCounter }}>
                   {children}
