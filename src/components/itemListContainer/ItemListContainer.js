@@ -39,7 +39,8 @@ const ItemListContainer = () => {
 
     return ( 
               <>
-              {!loading ? <span style={{display:'flex', justifyContent:'center', fontSize:"40px"}}><Loader/></span> 
+              {!loading ? 
+                <Loader loading="Loading.."/>
               : <ItemList products={state}/>
               }
               </>

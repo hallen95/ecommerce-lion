@@ -1,7 +1,6 @@
 import React from 'react';
 import { FiShoppingCart } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import './cartwidget.css';
 import useCartContext from '../../context/CartContext';
 
 const CartWidget = () => {
@@ -13,9 +12,9 @@ const CartWidget = () => {
 
     return (
         <Link to="/cart">
-            <div className="cartStyle">
+            <div style={{fontSize: "150%", color:"black", margin:"0 5px 20px"}}>
                     <FiShoppingCart /> 
-                    <p> items:{cartCounterWidget ? cartCounter() : 0} </p>
+                    <span> items:{cartCounterWidget ? cartCounter() : 0} </span>
             </div>
         </Link>
     )

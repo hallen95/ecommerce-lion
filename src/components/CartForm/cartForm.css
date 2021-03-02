@@ -1,14 +1,15 @@
+
 .whole-form{
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: red 1px solid;
-    margin-top: 70px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin-top: 30px;
 }
 
 h2{
     margin-bottom: 40px;
-    color: blueviolet;
 }
 
 .form-item{

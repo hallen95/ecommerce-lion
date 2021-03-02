@@ -1,11 +1,14 @@
 import React from 'react';
 import { Spinner } from 'react-bootstrap';
     
-function Loader() {
+function Loader({loading}) {
 
     return (
-    <Spinner className="spinnering" animation="border" role="status">
-    </Spinner>
+        <div style={{display:'flex', flexDirection:"column",
+        alignItems:'center', fontSize:"40px"}}>
+            <Spinner className="spinnering" animation="border" role="status"/>
+            <div style={{marginTop:"30px"}}>{loading}</div>
+        </div>
     )
 }
 

@@ -31,9 +31,9 @@ function ItemDetailContainer() {
 
     return (
         <React.Fragment>
-            {loading && !notFound ? <span style={{display:'flex', justifyContent:'center', fontSize:"40px"}}><Loader/></span>
+            {loading && !notFound ? <Loader loading="Loading.."/>
             : !loading && notFound ? <NotFound/>
-            : <ItemDetail loading={loading} getItem={item} /> }
+            : <ItemDetail getItem={item} /> }
         </React.Fragment>
     );
 }

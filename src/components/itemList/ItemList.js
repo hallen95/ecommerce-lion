@@ -5,11 +5,14 @@ import './itemList.css';
 const ItemList = ({products}) => {
     
     return (
-        <div className="itemMapeado">
-            <div className="grid">
-                {products.map(i => <Item key={i.id} itemmapeado={i}/>)}
+        <React.Fragment>
+        <div className="item__list__headspace"/>
+        <div className="item__list__container">
+            <div className="item__list__grid">
+                {products.map(i => (<Item key={i.id} itemmapeado={i}/>))}
             </div>
         </div>
+        </React.Fragment>
     )
 }
     
