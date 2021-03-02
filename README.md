@@ -16,7 +16,7 @@ Una vez que tengas clonado este repositorio en tu PC puedes inicializarlo muy f�
 El proyecto se encuentra entregado a la espera de corrección por parte del docente. Mejoras y optimizaciones se verán próximamente. 
 
 ### Enlaces públicos de referencia
-[Enlace a React-bootstrap](https://react-bootstrap.github.io/)
-[Enlace a React-Router-Dom](https://reactrouter.com/)
-[Enlace a Firebase](https://console.firebase.google.com/)
+[Enlace a React-bootstrap](https://react-bootstrap.github.io/)<br>
+[Enlace a React-Router-Dom](https://reactrouter.com/)<br>
+[Enlace a Firebase](https://console.firebase.google.com/)<br>
 [Enlace a React-icons](https://www.npmjs.com/package/react-icons)
